@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bunch;
+use App\Http\Requests\BunchRequest;
 use Illuminate\Http\Request;
 
 class BunchController extends Controller
@@ -31,62 +32,70 @@ class BunchController extends Controller
      */
     public function create()
     {
-        //
+        return view('bunch.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Bunch $bunch
+     * @param BunchRequest|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Bunch $bunch, BunchRequest $request)
     {
-        //
+        $bunch->create($request->all());
+        return redirect()->route('bunch.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Bunch $bunch
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show(Bunch $bunch)
     {
-        //
+        return view('bunch.show', compact('bunch'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Bunch $bunch
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Bunch $bunch)
     {
-        //
+        return view('bunch.edit', compact('bunch'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param Bunch $bunch
+     * @param BunchRequest|Request $request
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function update(Request $request, $id)
+    public function update(BunchRequest $request, Bunch $bunch)
     {
-        //
+        $bunch->update($request->all());
+        return redirect()->route('bunch.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Bunch $bunch
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Bunch $bunch)
     {
-        //
+        $bunch->delete();
+        return redirect()->route('bunch.index');
     }
 }

@@ -11,6 +11,12 @@ class Bunch extends Model
     use Updater;
     use Owned;
 
+    protected $fillable = ['name', 'description'];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function subscribers(){
         return $this->hasMany(Subscriber::class);
     }
