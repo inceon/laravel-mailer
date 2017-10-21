@@ -33,4 +33,11 @@ class User extends Authenticatable
     public function bunches(){
         return $this->hasMany(Bunch::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function templates(){
+        return $this->hasMany(Template::class);
+    }
 }

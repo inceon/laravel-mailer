@@ -23,4 +23,5 @@ Route::prefix('bunch/{bunch}')->group(function () {
         'index'
     ]]);
 });
+Route::resource('template', 'TemplateController');
 Route::get('/home', 'BunchController@index');
