@@ -53,6 +53,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        {{ link_to_route('bunch.index', 'Bunches') }}
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
