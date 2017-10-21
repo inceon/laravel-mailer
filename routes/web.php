@@ -18,4 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('bunch', 'BunchController');
+Route::prefix('bunch/{bunch}')->group(function () {
+    Route::resource('subscriber', 'SubscriberController');
+});
 Route::get('/home', 'BunchController@index');

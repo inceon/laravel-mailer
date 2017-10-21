@@ -4,25 +4,33 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Bunches
-            {{ link_to_route('bunch.index', 'all', null, ['class' => 'btn btn-info btn-xs pull-right']) }}
+            Subscribers
+            {{ link_to_route('bunch.index', 'all bunches', null, ['class' => 'btn btn-info btn-xs pull-right']) }}
         </div>
         <div class="panel-body">
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th width="25%">Attribute</th>
-                    <th width="75%">Value</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th width="15%">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($bunch->getAttributes() as $attr => $value)
-                    @if (isset($value))
-                        <tr>
-                            <td> {{ $attr }} </td>
-                            <td> {{ $value }} </td>
-                        </tr>
-                    @endif
+                @foreach ($bunch->subscribers as $subscriber)
+                    <tr>
+                        <td> {{ $subscriber->f_name }} </td>
+                        <td> {{ $subscriber->s_name }} </td>
+                        <td> {{ $subscriber->email }} </td>
+                        <td>
+                            {{Form::open(['class' => 'confirm-delete', 'route' => ['bunch.destroy', $bunch->id], 'method' => 'DELETE'])}}
+                            {{ link_to_route('subscriber.show', 'info', [$subscriber->id, $bunch->id], ['class' => 'btn btn-info btn-xs']) }} |
+                            {{ link_to_route('bunch.edit', 'edit', [$bunch->id], ['class' => 'btn btn-success btn-xs']) }} |
+                            {{Form::button('Delete', ['class' => 'btn btn-danger btn-xs', 'type' => 'submit'])}}
+                            {{Form::close()}}
+                        </td>
+                    </tr>
                 @endforeach
                 </tbody>
             </table>
