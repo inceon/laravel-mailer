@@ -44,7 +44,7 @@ class TemplateController extends Controller
     public function store(Template $template, TemplateRequest $request)
     {
         $template->create($request->all());
-        return redirect()->route('template.index');
+        return redirect()->route('template.show', compact('template'));
     }
 
     /**
@@ -82,7 +82,7 @@ class TemplateController extends Controller
     public function update(Template $template, TemplateRequest $request)
     {
         $template->update($request->all());
-        return redirect()->route('template.index');
+        return redirect()->route('template.show', compact('template'));
     }
 
     /**

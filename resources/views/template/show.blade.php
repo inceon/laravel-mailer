@@ -8,7 +8,7 @@
                 {{ link_to_route('template.index', 'all templates', null, ['class' => 'btn btn-info btn-xs pull-right']) }}
             </div>
             <div class="panel-body">
-                <iframe srcdoc="{!! $template->content !!}" class="col-lg-12" style="min-height: 800px;"></iframe>
+                {!! $template->content !!}
             </div>
         </div>
     </div>
