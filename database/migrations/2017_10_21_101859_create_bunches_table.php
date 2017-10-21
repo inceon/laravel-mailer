@@ -15,7 +15,13 @@ class CreateBunchesTable extends Migration
     {
         Schema::create('bunches', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->integer('status');
+            $table->string('description');
             $table->timestamps();
+            $table->integer('created_by');
+            $table->integer('updated_by');
+            $table->integer('deleted_by')->nullable();
             $table->softDeletes();
         });
     }
