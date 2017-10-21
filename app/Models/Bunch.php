@@ -11,7 +11,9 @@ class Bunch extends Model
     use Updater;
     use Owned;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = [
+        'name', 'description'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

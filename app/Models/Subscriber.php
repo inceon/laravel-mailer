@@ -9,7 +9,9 @@ class Subscriber extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['f_name', 's_name', 'email', 'bunch_id'];
+    protected $fillable = [
+        'f_name', 's_name', 'email', 'bunch_id'
+    ];
 
     public function bunches(){
         return $this->belongsTo(Bunch::class);

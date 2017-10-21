@@ -6,7 +6,7 @@
     {!!Form::label('s_name', 'Surname') !!}
     {!!Form::text('s_name', null, ['class' => 'form-control']) !!}
 </div>
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
     {!!Form::label('email', 'Email') !!}
     {!!Form::email('email', null, ['class' => 'form-control', 'required' => 'required']) !!}
     @if ($errors->has('email'))

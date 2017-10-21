@@ -11,6 +11,10 @@ class Template extends Model
     use Updater;
     use Owned;
 
+    protected $fillable = [
+        'name', 'content'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
