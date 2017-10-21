@@ -19,7 +19,6 @@ class CreateSubscribersTable extends Migration
             $table->string('s_name');
             $table->string('email');
             $table->integer('bunch_id')->unsigned();
-            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
         });
