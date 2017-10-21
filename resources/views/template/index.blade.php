@@ -21,7 +21,7 @@
                             <td> {{ $template->name }} </td>
                             <td>
                                 {{Form::open(['class' => 'confirm-delete', 'route' => ['template.destroy', $template->id], 'method' => 'DELETE'])}}
-                                {{ link_to_route('template.show', 'info', [$template->id], ['class' => 'btn btn-info btn-xs']) }} |
+                                {{ link_to_route('template.show', 'view', [$template->id], ['class' => 'btn btn-info btn-xs']) }} |
                                 {{ link_to_route('template.edit', 'edit', [$template->id], ['class' => 'btn btn-success btn-xs']) }} |
                                 {{Form::button('Delete', ['class' => 'btn btn-danger btn-xs', 'type' => 'submit'])}}
                                 {{Form::close()}}
