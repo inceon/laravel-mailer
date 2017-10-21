@@ -12,8 +12,8 @@
                     <thead>
                     <tr>
                         <th width="25%">Name</th>
-                        <th width="60%">Description</th>
-                        <th width="15%">Actions</th>
+                        <th width="55%">Description</th>
+                        <th width="20%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -23,7 +23,7 @@
                             <td> {{ $bunch->description }} </td>
                             <td>
                                 {{Form::open(['class' => 'confirm-delete', 'route' => ['bunch.destroy', $bunch->id], 'method' => 'DELETE'])}}
-                                {{ link_to_route('bunch.show', 'info', [$bunch->id], ['class' => 'btn btn-info btn-xs']) }} |
+                                {{ link_to_route('bunch.show', 'subscribers', [$bunch->id], ['class' => 'btn btn-info btn-xs']) }} |
                                 {{ link_to_route('bunch.edit', 'edit', [$bunch->id], ['class' => 'btn btn-success btn-xs']) }} |
                                 {{Form::button('Delete', ['class' => 'btn btn-danger btn-xs', 'type' => 'submit'])}}
                                 {{Form::close()}}

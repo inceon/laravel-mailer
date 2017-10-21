@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::resource('bunch', 'BunchController');
 Route::prefix('bunch/{bunch}')->group(function () {
-    Route::resource('subscriber', 'SubscriberController');
+    Route::resource('subscriber', 'SubscriberController', ['except' => [
+        'index'
+    ]]);
 });
 Route::get('/home', 'BunchController@index');
