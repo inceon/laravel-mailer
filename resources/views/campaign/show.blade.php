@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <td> Message </td>
-                            <td> {{ $campaign->template->content }} </td>
+                            <td> {!! $campaign->template->content !!} </td>
                         </tr>
                     </tbody>
                 </table>
