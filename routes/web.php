@@ -25,4 +25,5 @@ Route::prefix('bunch/{bunch}')->group(function () {
 });
 Route::resource('template', 'TemplateController');
 Route::resource('campaign', 'CampaignController');
+Route::post('/campaign/{campaign}/send', 'CampaignController@send')->name('campaign.send');
 Route::get('/home', 'BunchController@index');

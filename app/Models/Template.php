@@ -10,6 +10,7 @@ class Template extends Model
     use SoftDeletes;
     use Updater;
     use Owned;
+    use Selectable;
 
     protected $fillable = [
         'name', 'content'

@@ -5,17 +5,17 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Campaigns
-                {{ link_to_route('campaign.create', 'create', null, ['class' => 'btn btn-info btn-xs pull-right']) }}
+                {{ link_to_route('campaign.create', 'create', null, ['class' => 'btn btn-success btn-xs pull-right']) }}
             </div>
             <div class="panel-body">
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th width="20%">Name</th>
-                        <th width="25%">Description</th>
+                        <th>Description</th>
                         <th width="20%">Bunch</th>
                         <th width="20%">Template</th>
-                        <th width="15%">Actions</th>
+                        <th width="20%">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,11 +26,11 @@
                             <td> {{ $campaign->bunch->name }} </td>
                             <td> {{ $campaign->template->name }} </td>
                             <td>
-                                {{--{{Form::open(['class' => 'confirm-delete', 'route' => ['bunch.destroy', $bunch->id], 'method' => 'DELETE'])}}--}}
-                                {{--{{ link_to_route('bunch.show', 'subscribers', [$bunch->id], ['class' => 'btn btn-info btn-xs']) }} |--}}
-                                {{--{{ link_to_route('bunch.edit', 'edit', [$bunch->id], ['class' => 'btn btn-success btn-xs']) }} |--}}
-                                {{--{{Form::button('Delete', ['class' => 'btn btn-danger btn-xs', 'type' => 'submit'])}}--}}
-                                {{--{{Form::close()}}--}}
+                                {{Form::open(['class' => 'confirm-delete', 'route' => ['campaign.destroy', $campaign->id], 'method' => 'DELETE'])}}
+                                {{ link_to_route('campaign.show', 'SEND', [$campaign->id], ['class' => 'btn btn-warning btn-xs']) }} |
+                                {{ link_to_route('campaign.edit', 'edit', [$campaign->id], ['class' => 'btn btn-success btn-xs']) }} |
+                                {{Form::button('Delete', ['class' => 'btn btn-danger btn-xs', 'type' => 'submit'])}}
+                                {{Form::close()}}
                             </td>
                         </tr>
                     @endforeach
