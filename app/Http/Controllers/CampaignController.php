@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Campaign;
 use App\Http\Requests\CampaignRequest;
+use App\Mail\Sender;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\BinaryOp\Coalesce;
 
 class CampaignController extends Controller
@@ -29,7 +31,22 @@ class CampaignController extends Controller
 
     public function send(Campaign $campaign)
     {
-        dd($campaign);
+        $subscribers = $campaign->bunch->subscribers;
+        $template = $campaign->template->content;
+
+        if ($subscribers->count() > 25)
+        {
+            Mail::to($subscribers->take(25))
+                ->send(new Sender($template));
+
+            Mail::to($subscribers->splice(25))
+                ->queue(new Sender($template));
+        } else {
+            Mail::to($subscribers)
+                ->send(new Sender($template));
+        }
+
+        return redirect()->back()->with('data', 'Messages successfully sent');
     }
 
     /**
