@@ -23,6 +23,15 @@ class BunchPolicy
     }
 
     /**
+     * @param User $user
+     * @return bool
+     */
+    public function create(User $user)
+    {
+        return isset($user);
+    }
+
+    /**
      * Determine whether the user can update the bunch.
      *
      * @param  \App\User  $user
