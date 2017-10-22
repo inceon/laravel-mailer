@@ -34,13 +34,14 @@ class Sender extends Mailable
     public function build()
     {
         $template = $this->template;
-        $subcriber = $this->subscriber;
+        $subscriber = $this->subscriber;
 
-        $template = str_replace('{F_NAME}', $subcriber->f_name, $template);
-        $template = str_replace('{L_NAME}', $subcriber->s_name, $template);
+        $template = str_replace('{F_NAME}', $subscriber->f_name, $template);
+        $template = str_replace('{L_NAME}', $subscriber->s_name, $template);
 
-        $template = str_replace('{UNSUBSCRIBE}', URL::to('/').'/unsubscribe/'.$subcriber->id, $template);
+        $unsubscribe_link = strpos($template, '{UNSUBSCRIBE}');
+        $template = str_replace('{UNSUBSCRIBE}', URL::to('/').'/unsubscribe/'.$subscriber->id, $template);
 
-        return $this->view('email.index', compact('template'));
+        return $this->view('email.index', compact('template', 'subscriber', 'unsubscribe_link'));
     }
 }
