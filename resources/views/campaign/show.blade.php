@@ -7,7 +7,7 @@
                 {{Form::open(['class' => 'confirm-delete', 'route' => ['campaign.send', $campaign->id]])}}
                 Campaign `{{ $campaign->name }}`
                 {{ link_to_route('campaign.index', 'all campaigns', null, ['class' => 'btn btn-info btn-xs pull-right', 'style' => 'margin-left: 5px']) }}
-                {{Form::button('SEND TO ALL', ['class' => 'btn btn-success btn-xs pull-right', 'type' => 'submit'])}}
+                {{Form::button('SEND CAMPAIGN', ['class' => 'btn btn-success btn-xs pull-right', 'type' => 'submit'])}}
                 {{Form::close()}}
             </div>
             <div class="panel-body">
