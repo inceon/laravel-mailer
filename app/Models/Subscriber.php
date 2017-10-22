@@ -13,7 +13,11 @@ class Subscriber extends Model
         'f_name', 's_name', 'email', 'bunch_id'
     ];
 
-    public function bunches(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bunch()
+    {
         return $this->belongsTo(Bunch::class);
     }
 }

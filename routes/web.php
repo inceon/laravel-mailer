@@ -24,4 +24,5 @@ Route::prefix('bunch/{bunch}')->group(function () {
     ]]);
 });
 Route::resource('template', 'TemplateController');
+Route::resource('campaign', 'CampaignController');
 Route::get('/home', 'BunchController@index');

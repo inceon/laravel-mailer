@@ -40,4 +40,12 @@ class User extends Authenticatable
     public function templates(){
         return $this->hasMany(Template::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class);
+    }
 }

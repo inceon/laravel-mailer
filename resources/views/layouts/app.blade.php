@@ -60,6 +60,7 @@
                                     <li>
                                         {{ link_to_route('bunch.index', 'Bunches') }}
                                         {{ link_to_route('template.index', 'Templates') }}
+                                        {{ link_to_route('campaign.index', 'Campaigns') }}
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
