@@ -96,4 +96,16 @@ class SubscriberController extends Controller
         $subscriber->delete();
         return redirect()->route('bunch.show', compact('bunch'));
     }
+
+    public function subscription(Subscriber $subscriber)
+    {
+        return view('subscriber.subscription', compact('subscriber'));
+    }
+
+    public function unsubscribe(Subscriber $subscriber, Request $request)
+    {
+        $subscriber->update($request->all());
+        $subscriber->delete();
+        return redirect()->route('home');
+    }
 }

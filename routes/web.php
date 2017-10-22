@@ -18,12 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('bunch', 'BunchController');
+Route::resource('template', 'TemplateController');
+Route::resource('campaign', 'CampaignController');
+
 Route::prefix('bunch/{bunch}')->group(function () {
     Route::resource('subscriber', 'SubscriberController', ['except' => [
         'index'
     ]]);
 });
-Route::resource('template', 'TemplateController');
-Route::resource('campaign', 'CampaignController');
+Route::get('unsubscribe/{subscriber}', 'SubscriberController@subscription')->name('subscriber.subscription');
+Route::put('unsubscribe/{subscriber}', 'SubscriberController@unsubscribe')->name('subscriber.unsubscribe');
+
 Route::post('/campaign/{campaign}/send', 'CampaignController@send')->name('campaign.send');
-Route::get('/home', 'BunchController@index');
+Route::get('/home', 'BunchController@index')->name('home');

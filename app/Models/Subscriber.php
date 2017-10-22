@@ -10,7 +10,7 @@ class Subscriber extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'f_name', 's_name', 'email', 'bunch_id'
+        'f_name', 's_name', 'email', 'bunch_id', 'status', 'reason'
     ];
 
     /**

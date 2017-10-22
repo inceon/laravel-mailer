@@ -18,6 +18,8 @@ class CreateSubscribersTable extends Migration
             $table->string('f_name')->nullable();
             $table->string('s_name')->nullable();
             $table->string('email');
+            $table->integer('status')->default(0);
+            $table->text('reason')->nullable();
             $table->integer('bunch_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

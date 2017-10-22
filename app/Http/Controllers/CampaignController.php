@@ -8,6 +8,7 @@ use App\Mail\Sender;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\BinaryOp\Coalesce;
 
@@ -40,8 +41,9 @@ class CampaignController extends Controller
         $user = Auth::user();
 
         // available sending 300 emails per day
-        if ($user->email_counter + $number_subscribers > 300) {
-            $date = Carbon::parse($user->counter_reset);
+        $date = Carbon::parse($user->counter_reset);
+
+        if ($user->email_counter + $number_subscribers > Config::get('constants.max_emails')) {
 
             // if limit expired today - return error
             if ($date->isToday()) {
@@ -49,21 +51,24 @@ class CampaignController extends Controller
                     'type' => 'warning',
                     'message' => 'Delivery limit expired'
                 ]);
-            } else {
-                $user->counter_reset = $date;
-                $user->email_counter = 0;
             }
+        }
+        if (!$date->isToday()) {
+            $user->counter_reset = Carbon::today();
+            $user->email_counter = 0;
         }
 
         $user->email_counter += $number_subscribers;
 
         // Sending first 25 emails, other push to email queue
-        foreach($subscribers->take(25) as $subscriber) {
+        $emails_to_queue = Config::get('constants.emails_to_queue');
+
+        foreach($subscribers->take($emails_to_queue) as $subscriber) {
             Mail::to($subscriber->email)->send(new Sender($template, $subscriber));
         }
 
-        if ($number_subscribers > 25) {
-            foreach($subscribers->splice(25) as $subscriber) {
+        if ($number_subscribers > $emails_to_queue) {
+            foreach($subscribers->splice($emails_to_queue) as $subscriber) {
                 Mail::to($subscriber->email)->queue(new Sender($template, $subscriber));
             }
         }
