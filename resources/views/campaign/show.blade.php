@@ -12,8 +12,8 @@
             </div>
             <div class="panel-body">
                 @if (session()->has('data'))
-                    <div class="alert alert-success">
-                        {{ session('data') }}
+                    <div class="alert alert-{{ session('data')['type'] }}">
+                        {{ session('data')['message'] }}
                     </div>
                 @endif
                 <table class="table table-striped table-bordered">

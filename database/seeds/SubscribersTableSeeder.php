@@ -14,20 +14,20 @@ class SubscribersTableSeeder extends Seeder
         DB::table('subscribers')->insert([
             'f_name' => 'Иван',
             's_name' => 'Петров',
-            'email' => 'test@test.ru',
+            'email' => 'bladimir.rivan@oou.us',
             'bunch_id' => 1
         ]);
         DB::table('subscribers')->insert([
             'f_name' => 'Вася',
             's_name' => 'Пупкин',
-            'email' => 'pupil@123.ru',
+            'email' => 'mr.inceon@gmail.com',
             'bunch_id' => 1
         ]);
         DB::table('subscribers')->insert([
             'f_name' => 'Кирил',
             's_name' => 'Иванов',
             'email' => 'qwerty@123.ru',
-            'bunch_id' => 1
+            'bunch_id' => 2
         ]);
     }
 }
