@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Campaign;
 use App\Http\Requests\CampaignRequest;
 use App\Mail\Sender;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\BinaryOp\Coalesce;
 
@@ -32,21 +34,46 @@ class CampaignController extends Controller
     public function send(Campaign $campaign)
     {
         $subscribers = $campaign->bunch->subscribers;
+        $number_subscribers = $subscribers->count();
         $template = $campaign->template->content;
 
-        if ($subscribers->count() > 25)
-        {
-            Mail::to($subscribers->take(25))
-                ->send(new Sender($template));
+        $user = Auth::user();
 
-            Mail::to($subscribers->splice(25))
-                ->queue(new Sender($template));
-        } else {
-            Mail::to($subscribers)
-                ->send(new Sender($template));
+        // available sending 300 emails per day
+        if ($user->email_counter + $number_subscribers > 300) {
+            $date = Carbon::parse($user->counter_reset);
+
+            // if limit expired today - return error
+            if ($date->isToday()) {
+                return redirect()->back()->with('data', [
+                    'type' => 'warning',
+                    'message' => 'Delivery limit expired'
+                ]);
+            } else {
+                $user->counter_reset = $date;
+                $user->email_counter = 0;
+            }
         }
 
-        return redirect()->back()->with('data', 'Messages successfully sent');
+        $user->email_counter += $number_subscribers;
+
+        // Sending first 25 emails, other push to email queue
+        foreach($subscribers->take(25) as $subscriber) {
+            Mail::to($subscriber->email)->send(new Sender($template, $subscriber));
+        }
+
+        if ($number_subscribers > 25) {
+            foreach($subscribers->splice(25) as $subscriber) {
+                Mail::to($subscriber->email)->queue(new Sender($template, $subscriber));
+            }
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('data', [
+            'type' => 'success',
+            'message' => 'Messages successfully sent'
+        ]);
     }
 
     /**
